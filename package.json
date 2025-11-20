@@ -19,11 +19,11 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "typeorm-ts-node-commonjs",
-		"migration": "npm run typeorm migration:run -- --d src/database/config/migrations.config.ts",
-		"migration:generate": "npm run typeorm migration:generate -- --d src/database/config/migrations.config.ts src/database/migrations/%npm_config_name%",
-		"migration:show": "npm run typeorm migration:show -- --d src/database/config/migrations.config.ts",
-		"migration:revert": "npm run typeorm migration:revert -- --d src/database/config/migrations.config.ts",
-		"seed": "npx typeorm-extension seed:run --dataSource src/database/config/migrations.config.ts"
+    "migration": "npm run typeorm migration:run -- --d src/config/migrations.config.ts",
+    "migration:generate": "npm run typeorm migration:generate -- --d src/config/migrations.config.ts src/database/migrations/%npm_config_name%",
+    "migration:show": "npm run typeorm migration:show -- --d src/config/migrations.config.ts",
+    "migration:revert": "npm run typeorm migration:revert -- --d src/config/migrations.config.ts",
+    "seed": "npx typeorm-extension seed:run --dataSource src/config/migrations.config.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.1.9",
@@ -38,6 +38,7 @@
     "pg": "^8.16.3",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
+    "typeorm": "^0.3.27",
     "typeorm-extension": "^3.7.1"
   },
   "devDependencies": {
