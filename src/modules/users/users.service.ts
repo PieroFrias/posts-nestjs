@@ -3,8 +3,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Repository } from 'typeorm';
 import { User } from './entities';
 import { CreateUserDto } from './dto';
-import { GeneralStatus } from '../../common/constants';
-import { compareConfirmPassword, encodePassword, ErrorMessage } from '../../common/utils';
+import { GeneralStatus, Role } from '../../common/constants';
+import {
+  compareConfirmPassword,
+  encodePassword,
+  ErrorMessage,
+  validateAuthUser,
+} from '../../common/utils';
 
 @Injectable()
 export class UsersService {
@@ -34,6 +39,22 @@ export class UsersService {
     delete newUser.password;
 
     return newUser;
+  }
+
+  async findOne(id: string, authUserId?: string, role?: Role): Promise<User> {
+    const isAdminRole = role === Role.ADMIN;
+    const where = isAdminRole ? { id } : { id, status: GeneralStatus.ACTIVE };
+
+    const user = await this.repo.findOne({
+      where,
+      select: ['id', 'email', 'username', 'password', 'role', 'status', 'createdAt', 'updatedAt'],
+    });
+
+    !user && ErrorMessage.notFound('User', id);
+
+    validateAuthUser(id, authUserId, role);
+
+    return user;
   }
 
   async findOneActiveByUsername(username: string): Promise<User> {
