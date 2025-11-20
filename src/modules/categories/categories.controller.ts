@@ -1,34 +1,38 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Query } from '@nestjs/common';
+import { ApiOperation, ApiParam } from '@nestjs/swagger';
 import { CategoriesService } from './categories.service';
-import { CreateCategoryDto } from './dto/create-category.dto';
-import { UpdateCategoryDto } from './dto/update-category.dto';
+import { CreateCategoryDto, FilterCategoryDto, UpdateCategoryDto } from './dto';
 
 @Controller('categories')
 export class CategoriesController {
-  constructor(private readonly categoriesService: CategoriesService) {}
+  constructor(private readonly service: CategoriesService) {}
 
   @Post()
-  create(@Body() createCategoryDto: CreateCategoryDto) {
-    return this.categoriesService.create(createCategoryDto);
+  @ApiOperation({ summary: 'Create a new Category' })
+  create(@Body() createDto: CreateCategoryDto) {
+    return this.service.create(createDto);
   }
 
   @Get()
-  findAll() {
-    return this.categoriesService.findAll();
+  @ApiOperation({ summary: 'Returns all active Categories with optional filters' })
+  findAllActives(@Query() filterDto: FilterCategoryDto) {
+    return this.service.findAll(filterDto);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.categoriesService.findOne(+id);
+    return this.service.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
-    return this.categoriesService.update(+id, updateCategoryDto);
+  update(@Param('id') id: string, @Body() updateDto: UpdateCategoryDto) {
+    return this.service.update(id, updateDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.categoriesService.remove(+id);
+  @Patch(':id/status')
+  @ApiOperation({ summary: 'Change status of a Category' })
+  @ApiParam({ name: 'id', description: 'Category ID' })
+  changeStatus(@Param('id') id: string) {
+    return this.service.changeStatus(id);
   }
 }
