@@ -13,6 +13,7 @@ import {
   JwtConfigModule,
   AuthModule,
 } from './modules';
+import { CategoriesController } from './modules/categories/categories.controller';
 
 @Module({
   imports: [
@@ -27,7 +28,7 @@ import {
     JwtConfigModule,
     AuthModule,
   ],
-  controllers: [AuthController],
+  controllers: [AuthController, CategoriesController],
   providers: [],
 })
 export class AppModule {}
