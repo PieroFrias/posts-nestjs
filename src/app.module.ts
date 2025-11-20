@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './config';
+import { AuthController } from './modules/auth/auth.controller';
 import {
   UsersModule,
   PostsModule,
@@ -9,6 +10,8 @@ import {
   PostTagsModule,
   CommentsModule,
   CategoriesModule,
+  JwtConfigModule,
+  AuthModule,
 } from './modules';
 
 @Module({
@@ -21,8 +24,10 @@ import {
     TagsModule,
     PostTagsModule,
     CommentsModule,
+    JwtConfigModule,
+    AuthModule,
   ],
-  controllers: [],
+  controllers: [AuthController],
   providers: [],
 })
 export class AppModule {}
