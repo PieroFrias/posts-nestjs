@@ -19,6 +19,11 @@ export class ErrorMessage {
     throw new NotFoundException(message);
   }
 
+  static notFoundByFilter(entities: string): never {
+    const message = `No '${entities}' found.`;
+    throw new NotFoundException(message);
+  }
+
   static notAuthorized(): never {
     const message = `You are not authorized to perform this action.`;
     throw new UnauthorizedException(message);
