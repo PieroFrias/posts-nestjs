@@ -4,7 +4,7 @@ import { UsersService } from '../users/users.service';
 import { CreateUserDto } from '../users/dto';
 import { LoginDto, RegisterDto } from './dto';
 import { JwtPayload, LoginResponse, RegisterResponse } from './interfaces';
-import { compareHashedPassword, ErrorMessage, SuccesMessage } from '../../common/utils';
+import { compareHashedPassword, ErrorMessage, SuccessMessage } from '../../common/utils';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +18,7 @@ export class AuthService {
 
     return {
       data: newUser,
-      message: SuccesMessage.registered('User'),
+      message: SuccessMessage.registered('User'),
     };
   }
 
