@@ -7,3 +7,5 @@ export * from './error-message.util';
 export * from './password.util';
 
 export * from './success-message.util';
+
+export * from './trim-if-not-empty.util';
