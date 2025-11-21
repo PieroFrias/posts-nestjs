@@ -12,6 +12,7 @@ import { User } from '../../users/entities';
 import { Comment } from '../../comments/entities';
 import { PostTag } from '../../post-tags/entities';
 import { Category } from '../../categories/entities';
+import { PostStatus } from 'src/common/constants';
 
 @Entity('posts')
 export class Post {
@@ -24,8 +25,8 @@ export class Post {
   @Column({ type: 'text' })
   content: string;
 
-  @Column({ type: 'boolean', name: 'is_published', default: false })
-  isPublished: boolean;
+  @Column({ type: 'enum', enum: PostStatus, default: PostStatus.DRAFT })
+  status: PostStatus;
 
   @CreateDateColumn({ type: 'timestamp', name: 'created_at' })
   createdAt: Date;
