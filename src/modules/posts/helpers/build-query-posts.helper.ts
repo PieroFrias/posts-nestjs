@@ -1,15 +1,18 @@
 import { Repository } from 'typeorm';
 import { Post } from '../entities';
 import { FilterPostDto } from '../dto';
-import { calculateOffset, ErrorMessage } from '../../../common/utils';
+import { PostStatus, Role } from '../../../common/constants';
+import { calculateOffset, ErrorMessage, getStatusCondition } from '../../../common/utils';
 
 export const buildQueryPosts = async (
   repo: Repository<Post>,
   filterDto: FilterPostDto,
+  role?: Role,
 ): Promise<[Post[], number]> => {
-  const { page = 1, pageSize = 10, categoryId, searchTerm, tagIds } = filterDto;
+  const { page = 1, pageSize = 10, categoryId, searchTerm, tagIds, status } = filterDto;
 
   const offset = calculateOffset(page, pageSize);
+  const statusCondition = getStatusCondition(status, role, PostStatus, 'Posts');
   const categoryIdCondition = categoryId ? 'post.category.id = :categoryId' : '1=1';
   const searchTermCondition = searchTerm
     ? '(post.title LIKE :searchTerm OR post.content LIKE :searchTerm)'
@@ -21,13 +24,15 @@ export const buildQueryPosts = async (
 
   const [data, totalItems] = await repo
     .createQueryBuilder('post')
-    .where(categoryIdCondition, { categoryId })
-    .andWhere(searchTermCondition, { searchTerm: `%${searchTerm}%` })
+    .where(statusCondition, { status })
     .andWhere(tagIdsCondition, { tagIds })
-    .leftJoinAndSelect('post.tags', 'postTags')
+    .andWhere(categoryIdCondition, { categoryId })
+    .andWhere(searchTermCondition, { searchTerm: `%${searchTerm}%` })
+    .leftJoinAndSelect('post.postTags', 'postTags')
     .leftJoinAndSelect('postTags.tag', 'tags')
-    .leftJoinAndSelect('post.user', 'user')
+    .leftJoinAndSelect('post.author', 'author')
     .leftJoinAndSelect('post.category', 'category')
+    .orderBy('post.createdAt', 'DESC')
     .skip(offset)
     .take(pageSize)
     .getManyAndCount();

@@ -4,6 +4,7 @@ import {
   ArrayNotEmpty,
   IsArray,
   IsBoolean,
+  IsEnum,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -11,6 +12,7 @@ import {
   MaxLength,
 } from 'class-validator';
 import { trimIfNotEmpty } from '../../../common/utils';
+import { PostStatus } from 'src/common/constants';
 
 export class CreatePostDto {
   @ApiProperty({ required: true, example: 'c5b99f5f-60f7-43e2-8d8d-1d89aeceeb0e' })
@@ -42,8 +44,10 @@ export class CreatePostDto {
   @IsString({ each: true })
   tags?: string[];
 
-  @ApiProperty({ example: false, description: 'Indicates if the post will be published or not' })
-  @Transform(({ value }) => value === 'true')
-  @IsBoolean()
-  isPublished: boolean;
+  @ApiProperty({ required: false, type: 'string', enum: PostStatus, default: PostStatus.DRAFT })
+  @Transform(({ value }) => value?.trim().toUpperCase() || PostStatus.DRAFT)
+  @IsOptional()
+  @IsNotEmpty()
+  @IsEnum(PostStatus)
+  status: PostStatus;
 }
