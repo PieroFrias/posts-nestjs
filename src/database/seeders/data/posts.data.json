@@ -1,0 +1,122 @@
+[
+    {
+        "id": "c8a19a70-ef32-4c19-b4df-64ea093683df",
+        "title": "The Future of AI in Daily Life",
+        "content": "Artificial intelligence continues evolving.\nIts impact grows across industries.\nExperts predict massive changes.",
+        "status": "PUBLISHED",
+        "author": "9572c042-f812-4074-9416-001587d459e1",
+        "category": "b2c4f6a1-6dfc-4f90-8d28-0a592e3d5c71"
+    },
+    {
+        "id": "7d762a4d-eeb0-4ce0-b597-7a65e98ce738",
+        "title": "Why Digital Privacy Matters Today",
+        "content": "Online platforms collect more data than ever.\nUsers must understand privacy risks.\nProtecting identity is essential.",
+        "status": "DRAFT",
+        "author": "a3f5c1e2-4d3b-4c6a-9f2e-2b8e5d6f7c8a",
+        "category": "d7e9a314-5ebc-4f75-9b8e-5a1c2cf4e638"
+    },
+    {
+        "id": "3fd63b9e-d797-4cb0-8ebf-0a815296ea6b",
+        "title": "How to Start a Simple Blog",
+        "content": "Creating a blog is easier than it seems.\nChoose a platform and a domain.\nThen publish your first article.",
+        "status": "PUBLISHED",
+        "author": "b4e6d2f3-5a7c-4d8e-9f3b-3c9d6e7f8a9b",
+        "category": "a4f2b970-f816-4e79-9119-473f242b0e10"
+    },
+    {
+        "id": "c2b4d121-3c5b-4bc1-af57-f88a08b2d722",
+        "title": "Tech Industry Growth in 2025",
+        "content": "Companies continue investing in innovation.\nSoftware engineering roles are rising.\nAutomation drives the market.",
+        "status": "PUBLISHED",
+        "author": "9572c042-f812-4074-9416-001587d459e1",
+        "category": "e8b9f943-9f76-426b-b5b0-2fa8fb55891a"
+    },
+    {
+        "id": "e9e596f9-97ab-48d8-b053-00c6b02d3c57",
+        "title": "Top 5 Smartphones of the Year",
+        "content": "This year introduced powerful devices.\nCameras improved significantly.\nBattery performance also advanced.",
+        "status": "PUBLISHED",
+        "author": "a3f5c1e2-4d3b-4c6a-9f2e-2b8e5d6f7c8a",
+        "category": "c3e516a9-9454-43ff-a68f-19867dd0280d"
+    },
+    {
+        "id": "97bc2b4c-041e-4bb4-a960-03b64324cba3",
+        "title": "Understanding Cloud Computing Basics",
+        "content": "Cloud services are everywhere.\nThey provide storage and scalability.\nIdeal for modern applications.",
+        "status": "DRAFT",
+        "author": "9572c042-f812-4074-9416-001587d459e1",
+        "category": "a4f2b970-f816-4e79-9119-473f242b0e10"
+    },
+    {
+        "id": "ddb0f211-e03d-4b29-be34-661a21b1cf2c",
+        "title": "The Rise of Remote Work",
+        "content": "Remote work reshaped companies worldwide.\nNew tools emerged for collaboration.\nHybrid models dominate discussions.",
+        "status": "PUBLISHED",
+        "author": "b4e6d2f3-5a7c-4d8e-9f3b-3c9d6e7f8a9b",
+        "category": "b2c4f6a1-6dfc-4f90-8d28-0a592e3d5c71"
+    },
+    {
+        "id": "7aa1ab5e-dfd1-4f63-a4cf-66b0db58f9b4",
+        "title": "Is Social Media Changing Society?",
+        "content": "Social platforms influence opinions.\nThey shape communication habits.\nTheir long-term effects remain debated.",
+        "status": "DRAFT",
+        "author": "a3f5c1e2-4d3b-4c6a-9f2e-2b8e5d6f7c8a",
+        "category": "d7e9a314-5ebc-4f75-9b8e-5a1c2cf4e638"
+    },
+    {
+        "id": "a544dc12-4e67-4b5e-b758-572f24219343",
+        "title": "Beginner’s Guide to Cybersecurity",
+        "content": "Cyber threats are becoming common.\nUsers must adopt strong passwords.\nTwo-factor authentication helps.",
+        "status": "PUBLISHED",
+        "author": "9572c042-f812-4074-9416-001587d459e1",
+        "category": "a4f2b970-f816-4e79-9119-473f242b0e10"
+    },
+    {
+        "id": "c3b18d66-44a4-4e7f-9b75-93c0992fe4a3",
+        "title": "Market Trends for Startups",
+        "content": "Startups face new opportunities.\nFunding depends on innovation.\nStrong leadership is key.",
+        "status": "PUBLISHED",
+        "author": "b4e6d2f3-5a7c-4d8e-9f3b-3c9d6e7f8a9b",
+        "category": "e8b9f943-9f76-426b-b5b0-2fa8fb55891a"
+    },
+    {
+        "id": "1c3cb13f-604f-48b2-9e2f-af2ed3b2946f",
+        "title": "Review: The Best Laptops for Developers",
+        "content": "Developers need strong performance.\nLightweight designs are preferred.\nBattery duration remains essential.",
+        "status": "PUBLISHED",
+        "author": "a3f5c1e2-4d3b-4c6a-9f2e-2b8e5d6f7c8a",
+        "category": "c3e516a9-9454-43ff-a68f-19867dd0280d"
+    },
+    {
+        "id": "933a8b16-7e6e-4b42-8a7b-6839fbc894de",
+        "title": "Why Critical Thinking Matters",
+        "content": "Critical thinking improves decisions.\nIt helps analyze information.\nImportant in academic and work settings.",
+        "status": "DRAFT",
+        "author": "9572c042-f812-4074-9416-001587d459e1",
+        "category": "d7e9a314-5ebc-4f75-9b8e-5a1c2cf4e638"
+    },
+    {
+        "id": "3eafc7e1-b59d-4d9a-a85b-bf1fa59f26a7",
+        "title": "Economic Impact of New Technologies",
+        "content": "New tech affects global markets.\nSome jobs evolve while others disappear.\nGovernments analyze long-term effects.",
+        "status": "PUBLISHED",
+        "author": "b4e6d2f3-5a7c-4d8e-9f3b-3c9d6e7f8a9b",
+        "category": "e8b9f943-9f76-426b-b5b0-2fa8fb55891a"
+    },
+    {
+        "id": "f92a21bc-dc6c-4ab0-84c4-782abb950743",
+        "title": "News Update: Global Tech Conferences",
+        "content": "Major tech events take place worldwide.\nCompanies reveal new products.\nDevelopers attend workshops and talks.",
+        "status": "PUBLISHED",
+        "author": "9572c042-f812-4074-9416-001587d459e1",
+        "category": "b2c4f6a1-6dfc-4f90-8d28-0a592e3d5c71"
+    },
+    {
+        "id": "761b42a2-5fc7-47b1-96e5-3a2be0ecd67e",
+        "title": "Opinion: The Future of Online Learning",
+        "content": "Online learning has grown rapidly.\nStudents enjoy flexible schedules.\nNew tools enhance teaching methods.",
+        "status": "DRAFT",
+        "author": "a3f5c1e2-4d3b-4c6a-9f2e-2b8e5d6f7c8a",
+        "category": "d7e9a314-5ebc-4f75-9b8e-5a1c2cf4e638"
+    }
+]

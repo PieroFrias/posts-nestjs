@@ -1,0 +1,27 @@
+[
+    {
+        "id": "b2c4f6a1-6dfc-4f90-8d28-0a592e3d5c71",
+        "name": "News",
+        "status": "ACTIVE"
+    },
+    {
+        "id": "d7e9a314-5ebc-4f75-9b8e-5a1c2cf4e638",
+        "name": "Opinion",
+        "status": "ACTIVE"
+    },
+    {
+        "id": "a4f2b970-f816-4e79-9119-473f242b0e10",
+        "name": "Guides",
+        "status": "ACTIVE"
+    },
+    {
+        "id": "e8b9f943-9f76-426b-b5b0-2fa8fb55891a",
+        "name": "Analysis",
+        "status": "ACTIVE"
+    },
+    {
+        "id": "c3e516a9-9454-43ff-a68f-19867dd0280d",
+        "name": "Reviews",
+        "status": "ACTIVE"
+    }
+]

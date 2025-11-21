@@ -1,0 +1,52 @@
+[
+    {
+        "id": "f3c8a1d2-9b42-45d0-a3e5-5821c05f3b76",
+        "name": "technology",
+        "status": "ACTIVE"
+    },
+    {
+        "id": "b71e0c67-8ea1-4b22-91e7-bef0ebc57e54",
+        "name": "science",
+        "status": "ACTIVE"
+    },
+    {
+        "id": "d52fe3d9-e4bd-4b5e-9af5-f0bbef42d892",
+        "name": "nature",
+        "status": "ACTIVE"
+    },
+    {
+        "id": "c13ac8fa-4cc7-4e36-a2c2-5d0a9bdc6714",
+        "name": "education",
+        "status": "ACTIVE"
+    },
+    {
+        "id": "e6f9c3b1-3c4d-41c7-96a0-9a5c1e75c52b",
+        "name": "tutorial",
+        "status": "ACTIVE"
+    },
+    {
+        "id": "a482fc6d-8b7d-4e8a-9cf5-83b4d1efb79f",
+        "name": "health",
+        "status": "ACTIVE"
+    },
+    {
+        "id": "9a5ecb27-37fa-487d-8a16-b24057eb616e",
+        "name": "travel",
+        "status": "ACTIVE"
+    },
+    {
+        "id": "d79a318a-1cb9-4bba-a79f-36aabf7d8929",
+        "name": "lifestyle",
+        "status": "ACTIVE"
+    },
+    {
+        "id": "8c17b4e2-257d-4ce2-a51c-f79f67e41658",
+        "name": "food",
+        "status": "ACTIVE"
+    },
+    {
+        "id": "e271f87d-e157-4c9a-8522-c63a4073e4cb",
+        "name": "business",
+        "status": "ACTIVE"
+    }
+]

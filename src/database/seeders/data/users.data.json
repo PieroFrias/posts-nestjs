@@ -1,0 +1,26 @@
+[
+    {
+        "id": "9572c042-f812-4074-9416-001587d459e1",
+        "email": "user1@example.com",
+        "username": "user1",
+        "password": "User1Password",
+        "role": "ADMIN",
+        "status": "ACTIVE"
+    },
+    {
+        "id": "a3f5c1e2-4d3b-4c6a-9f2e-2b8e5d6f7c8a",
+        "email": "user2@example.com",
+        "username": "user2",
+        "password": "User2Password",
+        "role": "PUBLISHER",
+        "status": "INACTIVE"
+    },
+    {
+        "id": "b4e6d2f3-5a7c-4d8e-9f3b-3c9d6e7f8a9b",
+        "email": "user3@example.com",
+        "username": "user3",
+        "password": "User3Password",
+        "role": "PUBLISHER",
+        "status": "ACTIVE"
+    }
+]
