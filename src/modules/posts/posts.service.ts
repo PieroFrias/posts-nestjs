@@ -1,14 +1,15 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import { CreatePostDto, UpdatePostDto } from './dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Post } from './entities';
+import { CreatePostDto, FilterPostDto, UpdatePostDto } from './dto';
+import { buildQueryPosts, checkPostExists } from './helpers';
 import { UsersService } from '../users/users.service';
-import { CategoriesService } from '../categories/categories.service';
-import { checkPostExists } from './helpers';
 import { PostTagsService } from '../post-tags/post-tags.service';
-import { ErrorMessage, SuccessMessage } from 'src/common/utils';
-import { ChangeStatusResponse } from 'src/common/interfaces';
+import { CategoriesService } from '../categories/categories.service';
+import { PostStatus, Role } from '../../common/constants';
+import { ErrorMessage, getStatusConditionByRole, SuccessMessage } from '../../common/utils';
+import { ChangeStatusResponse, FindAllResponse, UpdateResponse } from '../../common/interfaces';
 
 @Injectable()
 export class PostsService {
@@ -21,15 +22,15 @@ export class PostsService {
     private readonly categoriesService: CategoriesService,
   ) {}
 
-  async create(createDto: CreatePostDto) {
+  async create(createDto: CreatePostDto, authorId: string) {
     const { title, categoryId, tags, ...rest } = createDto;
 
-    // const user = await this.usersService.findOne(userId);
+    const author = await this.usersService.findOne(authorId);
     const category = await this.categoriesService.findOne(categoryId);
 
     await checkPostExists(this.repo, title);
 
-    let newPost = this.repo.create({ ...rest, title, category });
+    let newPost = this.repo.create({ ...rest, title, category, author });
     newPost = await this.repo.save(newPost);
 
     await this.postTagsService.associateTagsWithPost(newPost, tags);
@@ -42,31 +43,64 @@ export class PostsService {
     };
   }
 
-  async findAll() {
-    return `This action returns all posts`;
+  async findAll(filterDto: FilterPostDto, role?: Role): Promise<FindAllResponse<Post>> {
+    const { page = 1, pageSize = 10 } = filterDto;
+
+    const [posts, totalItems] = await buildQueryPosts(this.repo, filterDto, role);
+    const totalPages = Math.ceil(totalItems / pageSize);
+
+    return {
+      data: posts,
+      currentPage: page,
+      totalPages,
+      totalItems,
+    };
   }
 
-  async findOne(id: string): Promise<Post> {
-    const post = await this.repo.findOne({ where: { id } });
+  async findOne(id: string, role?: Role): Promise<Post> {
+    const statusCondition = getStatusConditionByRole(role, PostStatus);
+
+    const post = await this.repo.findOne({
+      where: { id, ...statusCondition },
+      relations: ['author', 'category', 'postTags.tag'],
+    });
 
     !post && ErrorMessage.notFound('Post', id);
 
     return post;
   }
 
-  async update(id: number, updatePostDto: UpdatePostDto) {
-    return `This action updates a #${id} post`;
+  async update(id: string, updateDto: UpdatePostDto, role: Role): Promise<UpdateResponse<Post>> {
+    const { title, categoryId, tags, ...rest } = updateDto;
+
+    const [post, category] = await Promise.all([
+      this.findOne(id, role),
+      categoryId && this.categoriesService.findOne(categoryId),
+    ]);
+
+    await checkPostExists(this.repo, title, id);
+
+    let updatedPost = this.repo.merge(post, { ...rest, title, category });
+    updatedPost = await this.repo.save(updatedPost);
+
+    await this.postTagsService.associateTagsWithPost(updatedPost, tags);
+
+    const response = { ...updatedPost, tags };
+
+    return {
+      data: response,
+      message: SuccessMessage.updated('Post', id),
+    };
   }
 
-  async changeStatus(id: string): Promise<ChangeStatusResponse<Post>> {
-    const post = await this.findOne(id);
-    const isPublished = post.isPublished === true;
+  async changeStatus(id: string, role: Role): Promise<ChangeStatusResponse<Post>> {
+    const post = await this.findOne(id, role);
+    const isPublished = post.status === PostStatus.PUBLISHED;
 
-    post.isPublished = isPublished ? false : true;
+    post.status = isPublished ? PostStatus.DRAFT : PostStatus.PUBLISHED;
     await this.repo.save(post);
 
-    const postStatus = post.isPublished;
-    const newStatus = postStatus ? 'Published' : 'Draft';
+    const newStatus = post.status;
 
     return {
       data: post,
