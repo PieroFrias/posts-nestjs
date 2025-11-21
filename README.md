@@ -26,10 +26,44 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+## Clone repo
+
+```bash
+$ git clone https://github.com/PieroFrias/posts-nestjs.git
+$ cd posts-nestjs
+```
+
+### Setup environment variables
+
+- Copy the .env.example file and rename to .env.
+- Adjust the settings as needed.
+
+## Install dependencies
 
 ```bash
 $ npm install
+```
+
+### Dist directory
+
+```bash
+# Remove dist directory
+rm -rf dist
+
+# Generate new dist directory with a clean build
+npm run build
+```
+
+### Run database migrations
+
+```bash
+npm run migration
+```
+
+### Run seeders
+
+```bash
+npm run seed
 ```
 
 ## Running the app
@@ -40,22 +74,6 @@ $ npm run start
 
 # watch mode
 $ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
 ## Support
