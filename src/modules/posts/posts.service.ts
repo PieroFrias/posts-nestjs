@@ -49,8 +49,13 @@ export class PostsService {
     const [posts, totalItems] = await buildQueryPosts(this.repo, filterDto, role);
     const totalPages = Math.ceil(totalItems / pageSize);
 
+    const data = posts.map((post) => ({
+      ...post,
+      tags: post.postTags.map((pt) => ({ ...pt.tag })),
+    }));
+
     return {
-      data: posts,
+      data,
       currentPage: page,
       totalPages,
       totalItems,
@@ -67,7 +72,12 @@ export class PostsService {
 
     !post && ErrorMessage.notFound('Post', id);
 
-    return post;
+    const data = {
+      ...post,
+      tags: post.postTags.map((pt) => ({ ...pt.tag })),
+    };
+
+    return data;
   }
 
   async update(id: string, updateDto: UpdatePostDto, role: Role): Promise<UpdateResponse<Post>> {
