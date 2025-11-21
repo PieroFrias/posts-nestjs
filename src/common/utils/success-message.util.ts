@@ -1,4 +1,4 @@
-import { GeneralStatus } from '../constants';
+import { GeneralStatus, PostStatus } from '../constants';
 
 export class SuccessMessage {
   static created(entity: string, name: string): string {
@@ -16,7 +16,11 @@ export class SuccessMessage {
     return message;
   }
 
-  static statusChanged(entity: string, entityId: string, status: GeneralStatus | string): string {
+  static statusChanged(
+    entity: string,
+    entityId: string,
+    status: GeneralStatus | PostStatus,
+  ): string {
     const message = `Status of ${entity} with ID '${entityId}' has been successfully changed to '${status}'.`;
     return message;
   }
