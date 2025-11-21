@@ -86,14 +86,13 @@ export class PostsService {
     const [post, category] = await Promise.all([
       this.findOne(id, role),
       categoryId && this.categoriesService.findOne(categoryId),
+      checkPostExists(this.repo, title, id),
     ]);
-
-    await checkPostExists(this.repo, title, id);
 
     let updatedPost = this.repo.merge(post, { ...rest, title, category });
     updatedPost = await this.repo.save(updatedPost);
 
-    await this.postTagsService.associateTagsWithPost(updatedPost, tags);
+    await this.postTagsService.associateTagsWithPost(updatedPost, tags, id);
 
     const response = { ...updatedPost, tags };
 
