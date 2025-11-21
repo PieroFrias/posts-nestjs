@@ -19,14 +19,14 @@ export class CreatePostDto {
   @IsUUID()
   categoryId: string;
 
-  @ApiProperty({ required: true, example: 'Juan' })
+  @ApiProperty({ required: true, example: 'Post Title' })
   @Transform(({ value }) => value?.trim())
   @IsNotEmpty()
   @IsString()
   @MaxLength(100)
   title: string;
 
-  @ApiProperty({ required: false, example: 'Post Content.' })
+  @ApiProperty({ required: false, example: 'Post Content...' })
   @Transform(trimIfNotEmpty)
   @IsOptional()
   content?: string;
