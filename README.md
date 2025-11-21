@@ -57,6 +57,8 @@ npm run build
 ### Run database migrations
 
 ```bash
+npm run migration:generate --name=InitialMigration
+
 npm run migration
 ```
 
