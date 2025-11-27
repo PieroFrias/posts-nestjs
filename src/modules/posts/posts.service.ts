@@ -9,7 +9,12 @@ import { PostTagsService } from '../post-tags/post-tags.service';
 import { CategoriesService } from '../categories/categories.service';
 import { PostStatus, Role } from '../../common/constants';
 import { ErrorMessage, getStatusConditionByRole, SuccessMessage } from '../../common/utils';
-import { ChangeStatusResponse, FindAllResponse, UpdateResponse } from '../../common/interfaces';
+import {
+  IChangeStatusResponse,
+  ICreateResponse,
+  IFindAllResponse,
+  IUpdateResponse,
+} from '../../common/interfaces';
 
 @Injectable()
 export class PostsService {
@@ -22,7 +27,7 @@ export class PostsService {
     private readonly categoriesService: CategoriesService,
   ) {}
 
-  async create(createDto: CreatePostDto, authorId: string) {
+  async create(createDto: CreatePostDto, authorId: string): Promise<ICreateResponse<Post>> {
     const { title, categoryId, tags, ...rest } = createDto;
 
     const author = await this.usersService.findOne(authorId);
@@ -43,7 +48,7 @@ export class PostsService {
     };
   }
 
-  async findAll(filterDto: FilterPostDto, role?: Role): Promise<FindAllResponse<Post>> {
+  async findAll(filterDto: FilterPostDto, role?: Role): Promise<IFindAllResponse<Post>> {
     const { page = 1, pageSize = 10 } = filterDto;
 
     const [posts, totalItems] = await buildQueryPosts(this.repo, filterDto, role);
@@ -67,20 +72,21 @@ export class PostsService {
 
     const post = await this.repo.findOne({
       where: { id, ...statusCondition },
-      relations: ['author', 'category', 'postTags.tag'],
+      relations: ['author', 'category', 'comments.author', 'postTags.tag'],
     });
 
     !post && ErrorMessage.notFound('Post', id);
 
     const data = {
       ...post,
-      tags: post.postTags.map((pt) => ({ ...pt.tag })),
+      tags: post.postTags.map((item) => ({ ...item.tag })),
+      comments: post.comments.map((item) => ({ ...item })),
     };
 
     return data;
   }
 
-  async update(id: string, updateDto: UpdatePostDto, role: Role): Promise<UpdateResponse<Post>> {
+  async update(id: string, updateDto: UpdatePostDto, role: Role): Promise<IUpdateResponse<Post>> {
     const { title, categoryId, tags, ...rest } = updateDto;
 
     const [post, category] = await Promise.all([
@@ -102,7 +108,7 @@ export class PostsService {
     };
   }
 
-  async changeStatus(id: string, role: Role): Promise<ChangeStatusResponse<Post>> {
+  async changeStatus(id: string, role: Role): Promise<IChangeStatusResponse<Post>> {
     const post = await this.findOne(id, role);
     const isPublished = post.status === PostStatus.PUBLISHED;
 

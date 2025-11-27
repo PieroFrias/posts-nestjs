@@ -16,6 +16,11 @@ export class SuccessMessage {
     return message;
   }
 
+  static deleted(entity: string, entityId: string): string {
+    const message = `${entity} with ID '${entityId}' has been successfully deleted.`;
+    return message;
+  }
+
   static statusChanged(
     entity: string,
     entityId: string,

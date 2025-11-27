@@ -1,22 +1,22 @@
-export interface BaseResponse {
+export interface IBaseResponse {
   message: string;
 }
 
-export interface FindAllResponse<T> {
+export interface IFindAllResponse<T> {
   data: T[];
   currentPage: number;
   totalPages: number;
   totalItems: number;
 }
 
-export interface CreateResponse<T> extends BaseResponse {
+export interface ICreateResponse<T> extends IBaseResponse {
   data: T;
 }
 
-export interface UpdateResponse<T> extends CreateResponse<T> {}
+export interface IUpdateResponse<T> extends ICreateResponse<T> {}
 
-export interface ChangeStatusResponse<T> extends UpdateResponse<T> {}
+export interface IChangeStatusResponse<T> extends IUpdateResponse<T> {}
 
-// export interface RemoveResponse extends BaseResponse {}
+// export interface IRemoveResponse extends IBaseResponse {}
 
-// export interface RestoreResponse extends BaseResponse {}
+// export interface IRestoreResponse extends IBaseResponse {}

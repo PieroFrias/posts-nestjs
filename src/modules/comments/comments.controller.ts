@@ -1,34 +1,60 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { CommentsService } from './comments.service';
-import { CreateCommentDto } from './dto/create-comment.dto';
-import { UpdateCommentDto } from './dto/update-comment.dto';
+import {
+  CreateCommentDto,
+  CreateCommentResponseDto,
+  FilterCommentDto,
+  FindOneCommentResponseDto,
+  UpdateCommentDto,
+  UpdateCommentResponseDto,
+} from './dto';
+import { User } from '../users/entities';
+import { Auth, GetUser } from '../auth/decorator';
+import { Role } from '../../common/constants';
+import { Serialize } from '../../common/decorators';
+import { ApiBearerAuth, ApiOperation, ApiParam } from '@nestjs/swagger';
 
 @Controller('comments')
 export class CommentsController {
-  constructor(private readonly commentsService: CommentsService) {}
+  constructor(private readonly service: CommentsService) {}
 
   @Post()
-  create(@Body() createCommentDto: CreateCommentDto) {
-    return this.commentsService.create(createCommentDto);
+  @ApiBearerAuth()
+  @Auth(Role.PUBLISHER)
+  @Serialize(CreateCommentResponseDto)
+  @ApiOperation({ summary: 'Create a new comment' })
+  create(@Body() createDto: CreateCommentDto, @GetUser() authUser: User) {
+    return this.service.create(createDto, authUser.id);
   }
 
   @Get()
-  findAll() {
-    return this.commentsService.findAll();
+  @ApiOperation({ summary: 'Returns all comments with optional filters' })
+  findAll(@Query() filterDto: FilterCommentDto) {
+    return this.service.findAll(filterDto);
   }
 
   @Get(':id')
+  @Serialize(FindOneCommentResponseDto)
+  @ApiParam({ name: 'id', description: 'Comment ID' })
+  @ApiOperation({ summary: 'Returns details of a Comment by ID' })
   findOne(@Param('id') id: string) {
-    return this.commentsService.findOne(+id);
+    return this.service.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCommentDto: UpdateCommentDto) {
-    return this.commentsService.update(+id, updateCommentDto);
+  @ApiBearerAuth()
+  @Auth(Role.PUBLISHER)
+  @Serialize(UpdateCommentResponseDto)
+  @ApiOperation({ summary: 'Update a comment' })
+  update(@Param('id') id: string, @Body() updateDto: UpdateCommentDto, @GetUser() authUser: User) {
+    return this.service.update(id, updateDto, authUser.id);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.commentsService.remove(+id);
+  @ApiBearerAuth()
+  @Auth(Role.PUBLISHER)
+  @ApiOperation({ summary: 'Delete a comment' })
+  remove(@Param('id') id: string, @GetUser() authUser: User) {
+    return this.service.remove(id, authUser);
   }
 }

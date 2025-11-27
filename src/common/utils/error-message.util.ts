@@ -58,4 +58,14 @@ export class ErrorMessage {
     const message = 'password must contain at least one uppercase, one lowercase and one number.';
     return message;
   }
+
+  static onlyCreatorCanModifyComment(): never {
+    const message = `Only the creator of this comment can modify it.`;
+    throw new UnauthorizedException(message);
+  }
+
+  static onlyCreatorOrAdminCanRemoveComment(): never {
+    const message = `Only the creator of this comment or an admin can remove it.`;
+    throw new UnauthorizedException(message);
+  }
 }

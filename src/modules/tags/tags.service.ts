@@ -4,7 +4,7 @@ import { Like, Repository } from 'typeorm';
 import { Tag } from './entities';
 import { CreateTagDto, UpdateTagDto } from './dto';
 import { checkTagExists } from './helpers';
-import { CreateResponse, FindAllResponse, UpdateResponse } from '../../common/interfaces';
+import { ICreateResponse, IFindAllResponse, IUpdateResponse } from '../../common/interfaces';
 import { ErrorMessage, SuccessMessage } from '../../common/utils';
 
 @Injectable()

@@ -5,10 +5,10 @@ import { Category } from './entities';
 import { CreateCategoryDto, FilterCategoryDto, UpdateCategoryDto } from './dto';
 import { checkCategoryExists, buildQueryCategories } from './helpers';
 import {
-  ChangeStatusResponse,
-  CreateResponse,
-  FindAllResponse,
-  UpdateResponse,
+  IChangeStatusResponse,
+  ICreateResponse,
+  IFindAllResponse,
+  IUpdateResponse,
 } from '../../common/interfaces';
 import { ErrorMessage, SuccessMessage } from '../../common/utils';
 import { GeneralStatus } from 'src/common/constants';
@@ -20,7 +20,7 @@ export class CategoriesService {
     private readonly repo: Repository<Category>,
   ) {}
 
-  async create(createDto: CreateCategoryDto): Promise<CreateResponse<Category>> {
+  async create(createDto: CreateCategoryDto): Promise<ICreateResponse<Category>> {
     const { name } = createDto;
 
     await checkCategoryExists(this.repo, name);
@@ -34,7 +34,7 @@ export class CategoriesService {
     };
   }
 
-  async findAll(filterDto: FilterCategoryDto): Promise<FindAllResponse<Category>> {
+  async findAll(filterDto: FilterCategoryDto): Promise<IFindAllResponse<Category>> {
     const { page = 1, pageSize = 10 } = filterDto;
 
     const [data, totalItems] = await buildQueryCategories(this.repo, filterDto);
@@ -57,7 +57,7 @@ export class CategoriesService {
     return category;
   }
 
-  async update(id: string, updatedDto: UpdateCategoryDto): Promise<UpdateResponse<Category>> {
+  async update(id: string, updatedDto: UpdateCategoryDto): Promise<IUpdateResponse<Category>> {
     const { name } = updatedDto;
     const category = await this.findOne(id);
 
@@ -72,7 +72,7 @@ export class CategoriesService {
     };
   }
 
-  async changeStatus(id: string): Promise<ChangeStatusResponse<Category>> {
+  async changeStatus(id: string): Promise<IChangeStatusResponse<Category>> {
     const category = await this.findOne(id);
 
     const currentStatus = category.status;
