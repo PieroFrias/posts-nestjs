@@ -54,6 +54,11 @@ rm -rf dist
 npm run build
 ```
 
+### Create database
+
+- Before running the migrations, make sure the database exists.
+- The name of the database is defined in the .env file.
+
 ### Run database migrations
 
 ```bash
