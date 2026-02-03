@@ -2,8 +2,7 @@ name: CI/CD Deploy to Dokploy
 
 on:
     push:
-        branches:
-            - development
+        branches: [ development ]
 
 jobs:
     build-and-push:
@@ -26,6 +25,6 @@ jobs:
                   push: true
                   tags: ghcr.io/${{ github.repository }}:latest
 
-            - name: Deploy to Dokploy
+            - name: Trigger Dokploy Webhook
               run: |
                   curl -X POST "${{ secrets.DOKPLOY_WEBHOOK_URL }}"
