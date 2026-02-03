@@ -7,7 +7,7 @@ on:
 
 jobs:
     build-and-push:
-        runs-on: ubuntu:24.04
+        runs-on: ubuntu-24.04
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
@@ -24,7 +24,7 @@ jobs:
               with:
                   context: .
                   push: true
-                  tags: ghcr.io/${{ github.actor }}/posts-nestjs:latest
+                  tags: ghcr.io/${{ github.actor }}/${{ github.repository }}:latest
 
             - name: Deploy to Dokploy
               run: |
