@@ -5,7 +5,7 @@ import { PaginationDto } from '../../../common/dtos';
 import { BaseStatus, PostStatus } from '../../../common/constants';
 
 export class FilterPostDto extends PaginationDto {
-  @ApiProperty({ required: false, description: `Filter by Author PA PROBAR NOMÁ` })
+  @ApiProperty({ required: false, description: `Filter by Author` })
   @IsOptional()
   @IsUUID()
   authorId?: string;
