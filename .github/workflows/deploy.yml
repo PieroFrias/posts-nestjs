@@ -1,0 +1,31 @@
+name: CI/CD Deploy to Dokploy
+
+on:
+    push:
+        branches:
+            - development
+
+jobs:
+    build-and-push:
+        runs-on: ubuntu:24.04
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Login to Github Container Registry
+              uses: docker/login-action@v3
+              with:
+                  registry: ghcr.io
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Build and push Docker image
+              uses: docker/build-push-action@v5
+              with:
+                  context: .
+                  push: true
+                  tags: ghcr.io/${{ github.actor }}/posts-nestjs:latest
+
+            - name: Deploy to Dokploy
+              run: |
+                  curl -X POST "${{ secrets.DOKPLOY_WEBHOOK_URL }}"
