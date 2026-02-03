@@ -20,7 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "typeorm-ts-node-commonjs",
     "migration": "npm run typeorm migration:run -- --d src/config/migrations.config.ts",
-    "migration:generate": "npm run typeorm migration:generate -- --d src/config/migrations.config.ts src/database/migrations/%npm_config_name%",
+    "migration:generate": "cross-var npm run typeorm migration:generate -- -d src/config/migrations.config.ts src/database/migrations/$npm_config_name",
     "migration:show": "npm run typeorm migration:show -- --d src/config/migrations.config.ts",
     "migration:revert": "npm run typeorm migration:revert -- --d src/config/migrations.config.ts",
     "seed": "npx typeorm-extension seed:run --dataSource src/config/migrations.config.ts"
@@ -58,6 +58,7 @@
     "@types/supertest": "^6.0.3",
     "@typescript-eslint/eslint-plugin": "^8.47.0",
     "@typescript-eslint/parser": "^8.47.0",
+    "cross-var": "^1.1.0",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.0.0",
